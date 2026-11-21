@@ -112,6 +112,13 @@ button:hover:disabled,
 	display: block;
 }
 
+.attribution {
+	margin-top: 24px;
+	font-size: 0.8rem;
+	text-align: center;
+	color: #475467;
+}
+
 .result-header {
 	display: flex;
 	align-items: center;
