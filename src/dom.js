@@ -56,11 +56,16 @@ export function initForm() {
 	const input = document.getElementById("location");
 	const domError = document.getElementById("error");
 	const unitButton = document.getElementById("unit-toggle");
+	const loading = document.getElementById("loading");
+	const searchButton = document.getElementById("search-button");
 	let unit = "us";
 	let lastLocation = "";
 
 	async function showWeather(location) {
 		domError.textContent = "";
+		loading.classList.add("shown");
+		searchButton.setAttribute("disabled", "");
+		unitButton.setAttribute("disabled", "");
 		try {
 			const data = await loadWeather(location, unit);
 			renderWeather(data, unit);
@@ -68,6 +73,10 @@ export function initForm() {
 		} catch (error) {
 			console.log(error.message);
 			domError.textContent = "There was an error, please try again.";
+		} finally {
+			loading.classList.remove("shown");
+			searchButton.removeAttribute("disabled");
+			unitButton.removeAttribute("disabled");
 		}
 	}
 

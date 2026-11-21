@@ -80,10 +80,27 @@ button:hover {
 	background-color: #1f56c4;
 }
 
+button:disabled,
+#unit-toggle:disabled,
+button:hover:disabled,
+#unit-toggle:hover:disabled {
+	background-color: #9aa5b1;
+	color: #ffffff;
+}
+
 #error {
 	display: block;
 	margin-top: 12px;
 	color: #b42318;
+}
+
+#loading {
+	display: none;
+	margin-top: 12px;
+}
+
+#loading.shown {
+	display: block;
 }
 
 #result {

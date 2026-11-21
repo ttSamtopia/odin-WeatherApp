@@ -12,8 +12,9 @@
 			<form id="location-form">
 				<label for="location">Location</label>
 				<input type="text" id="location" name="location" required />
-				<button type="submit">Get weather</button>
+				<button type="submit" id="search-button">Get weather</button>
 			</form>
+			<span id="loading" aria-live="polite">Loading...</span>
 			<span id="error" aria-live="polite"></span>
 			<div id="result">
 				<div class="result-header">
