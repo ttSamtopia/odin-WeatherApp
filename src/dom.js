@@ -6,19 +6,49 @@ async function setIcon(imgId, iconName) {
 	img.src = icon.default;
 }
 
+function setText(id, text) {
+	document.getElementById(id).textContent = text;
+}
+
+function getLookClass(icon) {
+	if (icon.endsWith("-night")) {
+		return "night";
+	}
+	if (icon.includes("snow")) {
+		return "snowy";
+	}
+	if (icon.includes("rain") || icon.includes("showers")) {
+		return "rainy";
+	}
+	if (icon === "cloudy" || icon === "fog" || icon === "wind") {
+		return "cloudy";
+	}
+	return "sunny";
+}
+
 function renderWeather(data, unit) {
-	setIcon("now-icon", data.now.icon);
-	setIcon("today-icon", data.today.icon);
-	setIcon("tomorrow-icon", data.tomorrow.icon);
+	document.querySelector("body").className = getLookClass(data.now.icon);
+	document.getElementById("result").classList.add("shown");
 	const deg = unit === "us" ? "°F" : "°C";
 	const speed = unit === "us" ? "mph" : "km/h";
-	document.getElementById("address").textContent = data.resolvedAddress;
-	document.getElementById("now").textContent =
-		`Now: ${data.now.temp}${deg} (feels like ${data.now.feelslike}${deg}), ${data.now.conditions}, wind ${data.now.windspeed} ${speed}`;
-	document.getElementById("today").textContent =
-		`Today: ${data.today.tempmin}${deg} to ${data.today.tempmax}${deg}, ${data.today.conditions}, ${data.today.precipprob}% chance of rain`;
-	document.getElementById("tomorrow").textContent =
-		`Tomorrow: ${data.tomorrow.tempmin}${deg} to ${data.tomorrow.tempmax}${deg}, ${data.tomorrow.conditions}, ${data.tomorrow.precipprob}% chance of rain`;
+	setIcon("now-icon", data.now.icon);
+	setText("address", data.resolvedAddress);
+	setText("now-temp", `${data.now.temp}${deg}`);
+	setText("now-conditions", data.now.conditions);
+	setText(
+		"now-details",
+		`Feels like ${data.now.feelslike}${deg}, wind ${data.now.windspeed} ${speed}`,
+	);
+	for (const name of ["today", "tomorrow"]) {
+		const day = data[name];
+		setIcon(`${name}-icon`, day.icon);
+		setText(
+			`${name}-range`,
+			`${day.tempmin}${deg} to ${day.tempmax}${deg}`,
+		);
+		setText(`${name}-conditions`, day.conditions);
+		setText(`${name}-rain`, `${day.precipprob}% chance of rain`);
+	}
 }
 
 export function initForm() {
