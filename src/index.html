@@ -1,20 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div>
-      <h1>Weather App</h1>
-      <form id="location-form">
-        <label for="location">Location</label>
-        <input type="text" id="location" name="location" required />
-        <button type="submit">Get weather</button>
-      </form>
-    </div>
-    <script src="./index.js" type="module"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Weather App</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<div>
+			<h1>Weather App</h1>
+			<form id="location-form">
+				<label for="location">Location</label>
+				<input type="text" id="location" name="location" required />
+				<button type="submit">Get weather</button>
+			</form>
+			<button type="button" id="unit-toggle">Show °C</button>
+			<span id="error" aria-live="polite"></span>
+			<div id="result">
+				<h2 id="address"></h2>
+				<img id="now-icon" alt="" width="48" height="48" />
+				<div id="now"></div>
+				<img id="today-icon" alt="" width="48" height="48" />
+				<div id="today"></div>
+				<img id="tomorrow-icon" alt="" width="48" height="48" />
+				<div id="tomorrow"></div>
+			</div>
+		</div>
+		<script src="./index.js" type="module"></script>
+	</body>
 </html>

@@ -1,12 +1,12 @@
 const BASE_URL =
 	"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline";
 
-function buildUrl(location) {
-	return `${BASE_URL}/${location}`;
+function buildUrl(location, unit) {
+	return `${BASE_URL}/${location}?unitGroup=${unit}`;
 }
 
-export async function getWeather(location) {
-	const url = buildUrl(location);
+export async function getWeather(location, unit) {
+	const url = buildUrl(location, unit);
 
 	try {
 		const response = await fetch(url);
@@ -65,15 +65,15 @@ export function processWeather(data) {
 	};
 }
 
-export async function loadWeather(location) {
+export async function loadWeather(location, unit) {
 	if (!location) {
 		throw new Error("Not a valid location");
 	}
 
 	try {
-		let weatherData = await getWeather(location);
+		let weatherData = await getWeather(location, unit);
 		weatherData = processWeather(weatherData);
-		console.log(weatherData);
+		return weatherData;
 	} catch (error) {
 		throw new Error(`Caller caught: ${error.message}`, {
 			cause: error,
