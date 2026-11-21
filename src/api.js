@@ -20,3 +20,47 @@ export async function getWeather(location) {
 		throw error;
 	}
 }
+
+export function processWeather(data) {
+	if (
+		!data ||
+		!data.currentConditions ||
+		!data.days ||
+		data.days.length < 2
+	) {
+		throw new Error("Invalid weather data");
+	}
+	const current = data.currentConditions;
+	const today = data.days[0];
+	const tomorrow = data.days[1];
+
+	return {
+		resolvedAddress: data.resolvedAddress,
+		now: {
+			temp: current.temp,
+			feelslike: current.feelslike,
+			conditions: current.conditions,
+			icon: current.icon,
+			windspeed: current.windspeed,
+			winddir: current.winddir,
+		},
+		today: {
+			tempmax: today.tempmax,
+			tempmin: today.tempmin,
+			feelslikemax: today.feelslikemax,
+			feelslikemin: today.feelslikemin,
+			conditions: today.conditions,
+			icon: today.icon,
+			precipprob: today.precipprob,
+		},
+		tomorrow: {
+			tempmax: tomorrow.tempmax,
+			tempmin: tomorrow.tempmin,
+			feelslikemax: tomorrow.feelslikemax,
+			feelslikemin: tomorrow.feelslikemin,
+			conditions: tomorrow.conditions,
+			icon: tomorrow.icon,
+			precipprob: tomorrow.precipprob,
+		},
+	};
+}
