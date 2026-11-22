@@ -1,0 +1,49 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1.0"><title>Weather App</title><link rel=stylesheet href=styles.css></head><body>
+		<div class=card>
+			<h1>Weather App</h1>
+			<form id=location-form>
+				<label for=location>Location</label>
+				<input type=text id=location name=location required>
+				<button type=submit id=search-button>Get weather</button>
+			</form>
+			<span id=loading aria-live=polite>Loading...</span>
+			<span id=error aria-live=polite></span>
+			<div id=result>
+				<div class=result-header>
+					<h2 id=address></h2>
+					<button type=button id=unit-toggle>Show °C</button>
+				</div>
+				<div class=now>
+					<img id=now-icon alt width=64 height=64>
+					<div>
+						<div id=now-temp></div>
+						<div id=now-conditions></div>
+						<div id=now-details></div>
+					</div>
+				</div>
+				<div class=days>
+					<div class=day>
+						<h3>Today</h3>
+						<img id=today-icon alt width=40 height=40>
+						<div id=today-range class=range></div>
+						<div id=today-conditions></div>
+						<div id=today-rain class=rain></div>
+					</div>
+					<div class=day>
+						<h3>Tomorrow</h3>
+						<img id=tomorrow-icon alt width=40 height=40>
+						<div id=tomorrow-range class=range></div>
+						<div id=tomorrow-conditions></div>
+						<div id=tomorrow-rain class=rain></div>
+					</div>
+				</div>
+			</div>
+			<p class=attribution>
+				Weather data provided by
+				<a href=https://www.visualcrossing.com/>Visual Crossing Weather</a>
+			</p>
+		</div>
+		<script src=index.js></script>
+	
+
+</body></html>
